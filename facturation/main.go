@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 type FacturationResponse struct {
@@ -49,19 +50,32 @@ func designSeparater() {
 }
 
 func main() {
+	fmt.Println("############ Bienvenu sur l'application de facturation ###############")
+
 	for true {
 		var price int
-		fmt.Println("Tape 1 pour annuler")
+		var commandOption string
 		fmt.Println("")
-		fmt.Print("Saisissez le montant total des achats: ")
-		fmt.Scanln(&price)
-		if price == 1 {
+		fmt.Println("pour une nouvelle facturation taper F")
+		fmt.Println("pour arrêter l'application taper A")
+		fmt.Print("Choisissez une option: ")
+		fmt.Scanln(&commandOption)
+		if strings.ToUpper(commandOption) == "A" {
 			break
 		}
-		resultat := facturation(price)
-		designSeparater()
-		display(resultat)
-		designSeparater()
+		if strings.ToUpper(commandOption) == "F" {
+			fmt.Print("Saisissez le montant total des achats: ")
+			fmt.Scanln(&price)
+			resultat := facturation(price)
+			designSeparater()
+			display(resultat)
+			designSeparater()
+		} else {
+			fmt.Println()
+			fmt.Println("commande inconnue, ressayer !")
+			continue
+		}
+
 	}
 
 }
